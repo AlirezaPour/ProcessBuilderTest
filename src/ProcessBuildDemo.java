@@ -11,7 +11,7 @@ public class ProcessBuildDemo {
 
 	 public static void main(String [] args) throws IOException {
 	        
-	        String[] command = {"/home/alireza/prism-4.2/bin/prism", "model.sm", "-simpath 'time=5.200000,snapshot=0.100000,vars=(user_near_sending),sep=comma'", "output_path.csv", "-simpathlen 100000000"};
+	        String[] command = {"/home/alireza/PRISM/prism-4.2.beta1-linux64/bin/prism", "model.sm", "-simpath", "time=5.20,snapshot=0.100000,vars=(user_near_sending),sep=comma", "output_path.csv", "-simpathlen", "100000000"};
 	        ProcessBuilder probuilder = new ProcessBuilder( command );
 
 	        //You can set up your work directory
@@ -24,12 +24,12 @@ public class ProcessBuildDemo {
 	        InputStreamReader isr = new InputStreamReader(is);
 	        BufferedReader br = new BufferedReader(isr);
 	        String line;
-	        System.out.printf("Output of running %s is:\n",
-	                Arrays.toString(command));
+	        System.out.printf("Output of running %s is:\n", Arrays.toString(command));
 	        while ((line = br.readLine()) != null) {
 	            System.out.println(line);
 	        }
 	         
+	        
 	        
 	    }
 	
