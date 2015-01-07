@@ -29,10 +29,15 @@ public class Combiner {
 		Scanner in1 = null ;
 		Scanner in2 = null; 
 		Scanner in3 = null;
+		Scanner in4 = null;
+		
 		try {
-			in1 = new Scanner(new FileReader("/home/alireza/Dropbox/Academics/Thesis/TwoTierNetworkCaseStudy/Model/TwoFemtoCells/PRISM_Analysis/prob_user_near_sending_series_1.csv"));
-			in2 = new Scanner(new FileReader("/home/alireza/Dropbox/Academics/Thesis/TwoTierNetworkCaseStudy/Model/TwoFemtoCells/PRISM_Analysis/prob_user_near_sending_series_2.csv"));
-			in3 = new Scanner(new FileReader("/home/alireza/Dropbox/Academics/Thesis/TwoTierNetworkCaseStudy/Model/TwoFemtoCells/PRISM_Analysis/prob_user_near_sending_series_3.csv"));
+			
+			in1 = new Scanner(new FileReader("/afs/inf.ed.ac.uk/user/s09/s0961765/TwoTierNetworkCaseStudy/TwoFemtoCells/PRISM_Analysis/prob_user_near_sending_series_1.csv"));
+			in2 = new Scanner(new FileReader("/afs/inf.ed.ac.uk/user/s09/s0961765/TwoTierNetworkCaseStudy/TwoFemtoCells/PRISM_Analysis/prob_user_near_sending_series_2.csv"));
+			in3 = new Scanner(new FileReader("/afs/inf.ed.ac.uk/user/s09/s0961765/TwoTierNetworkCaseStudy/TwoFemtoCells/PRISM_Analysis/prob_user_near_sending_series_3.csv"));
+			in4 = new Scanner(new FileReader("/afs/inf.ed.ac.uk/user/s09/s0961765/TwoTierNetworkCaseStudy/TwoFemtoCells/PRISM_Analysis/prob_user_near_sending_series_4.csv"));
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Could not the input files.");
@@ -42,29 +47,34 @@ public class Combiner {
 		String line1= "";
 		String line2= "";
 		String line3= "";
+		String line4= "";
 		
 		// we skip the first line
 		line1 = in1.nextLine();
 		line2 = in2.nextLine();
 		line3 = in3.nextLine();
+		line4 = in4.nextLine();
 		
 		while(in1.hasNext()){
 			
 			line1 = in1.nextLine();
 			line2 = in2.nextLine();
 			line3 = in3.nextLine();
+			line4 = in4.nextLine();
 
 			String[] tokens1 = line1.split(",");
 			String[] tokens2 = line2.split(",");
 			String[] tokens3 = line3.split(",");
+			String[] tokens4 = line4.split(",");
 			
 			int currentValue = Integer.parseInt(tokens1[0]);
 			
 			double prob1 = Double.parseDouble(tokens1[1]); 
 			double prob2 = Double.parseDouble(tokens2[1]);
 			double prob3 = Double.parseDouble(tokens3[1]);
+			double prob4 = Double.parseDouble(tokens4[1]);
 			
-			double prob = ( prob1 + prob2 + prob3 ) / 3; 
+			double prob = ( prob1 + prob2 + prob3 + prob4) / 4; 
 			
 			outProb.put(currentValue, prob);
 			
@@ -72,7 +82,7 @@ public class Combiner {
 		
 		String output;
 		 try {
-		        BufferedWriter out = new BufferedWriter(new FileWriter("/home/alireza/Dropbox/Academics/Thesis/TwoTierNetworkCaseStudy/Model/TwoFemtoCells/PRISM_Analysis/prob_user_near_sending.csv"));
+		        BufferedWriter out = new BufferedWriter(new FileWriter("/afs/inf.ed.ac.uk/user/s09/s0961765/TwoTierNetworkCaseStudy/TwoFemtoCells/PRISM_Analysis/prob_user_near_sending.csv"));
 		        out.write("value,prob\n");
 		        for (int i = 0; i <= 200; i++) {
 		        	output = String.format("%d,%f\n",i,outProb.get(i));
